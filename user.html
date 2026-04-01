@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrderEase | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center; text-align: left; margin-bottom: 2rem;">
+            <div>
+                <h1 style="font-size: 2.5rem; margin-bottom:0;"><i class="fa-solid fa-truck-fast"></i> OrderEase</h1>
+                <p id="userGreeting" style="margin-top:0.25rem; color: var(--text-secondary);">Welcome!</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button id="btnShowMenu" class="btn btn-primary" style="width: auto; padding: 0.5rem 1.2rem; margin-top:0;">
+                    <i class="fa-solid fa-utensils"></i> Browse Menu
+                    </button>
+                <button id="btnShowOrders" class="btn btn-secondary" style="width: auto; padding: 0.5rem 1.2rem; margin-top:0;">
+                    <i class="fa-solid fa-list-ul"></i> Track Orders
+                </button>
+                <button id="logoutBtn" class="btn btn-secondary" style="width: auto; padding: 0.5rem 1rem; margin-top:0;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- VIEW 1: MENU BROWSING -->
+        <div id="viewMenu" class="main-grid">
+            <div style="grid-column: 1 / -1;">
+                <div class="tabs">
+                    <div class="tab active" data-category="All">All Items</div>
+                    <div class="tab" data-category="Starters">Starters</div>
+                    <div class="tab" data-category="Main Course">Main Course</div>
+                    <div class="tab" data-category="Beverages">Beverages</div>
+                    <div class="tab" data-category="Desserts">Desserts</div>
+                </div>
+            </div>
+
+            <div style="flex: 1;">
+                <div id="menuContainer" class="menu-grid">
+                    <!-- Menu cards injected here -->
+                </div>
+            </div>
+
+            <div class="cart-panel">
+                <div class="glass-panel">
+                    <div class="panel-header"><i class="fa-solid fa-cart-shopping"></i> My Cart</div>
+                    <div id="cartItemsList">
+                        <p style="text-align: center; color: var(--text-secondary); padding: 2rem 0;">Your cart is empty.</p>
+                    </div>
+                    <div class="cart-total-row">
+                        <span>Total:</span>
+                        <span id="cartTotalText">$0.00</span>
+                    </div>
+                    <button id="btnCheckout" class="btn btn-primary" style="margin-top: 1.5rem;" disabled>
+                        Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: TRACK ORDERS -->
+        <div id="viewOrders" class="kanban-board" style="display: none;">
+            <div class="kanban-col">
+                <h3>Pending <span class="badge" id="countPending">0</span></h3>
+                <div id="colPending" class="col-content"></div>
+            </div>
+            <div class="kanban-col">
+                <h3>Preparing <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: var(--warning);" id="countPreparing">0</span></h3>
+                <div id="colPreparing" class="col-content"></div>
+            </div>
+            <div class="kanban-col">
+                <h3>Ready <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: var(--success);" id="countReady">0</span></h3>
+                <div id="colReady" class="col-content"></div>
+            </div>
+            <div class="kanban-col">
+                <h3>History <span class="badge" id="countCancelled">0</span></h3>
+                <div id="colCancelled" class="col-content"></div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="user.js"></script>
+</body>
+</html>

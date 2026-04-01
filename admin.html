@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrderEase | Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center; text-align: left;">
+            <div>
+                <h1 style="font-size: 2.5rem; margin-bottom:0;"><i class="fa-solid fa-truck-fast"></i> OrderEase</h1>
+                <p style="margin-top:0.25rem;">Global Kitchen Management</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button id="btnShowLiveOrders" class="btn btn-primary" style="width: auto; padding: 0.5rem 1.2rem; margin-top:0;">
+                    <i class="fa-solid fa-fire-burner"></i> Live Orders
+                </button>
+                <button id="btnShowMenuManager" class="btn btn-secondary" style="width: auto; padding: 0.5rem 1.2rem; margin-top:0;">
+                    <i class="fa-solid fa-utensils"></i> Manage Menu
+                </button>
+                <button id="logoutBtn" class="btn btn-secondary" style="width: auto; padding: 0.5rem 1rem; margin-top:0;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <div id="viewLiveOrders">
+            <div class="metrics-container" id="metricsPanel"></div>
+            <div class="glass-panel" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <div class="panel-header" style="border:none; padding:0; margin:0;"><i class="fa-solid fa-sliders"></i> Priority Queue Control Center</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Next Order Up:</strong> <span id="nextUpPreview">No pending orders</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="btnProcessNext" class="btn btn-primary" style="margin-top: 0;">Process Next</button>
+                    <button id="btnUndoCancel" class="btn btn-secondary" style="margin-top: 0;">Undo Last Cancellation</button>
+                </div>
+            </div>
+            <div class="kanban-board">
+                <div class="kanban-col"><h3>Pending <span class="badge" id="countPending">0</span></h3><div id="colPending"></div></div>
+                <div class="kanban-col"><h3>Preparing <span class="badge" id="countPreparing">0</span></h3><div id="colPreparing"></div></div>
+                <div class="kanban-col"><h3>Ready <span class="badge" id="countReady">0</span></h3><div id="colReady"></div></div>
+                <div class="kanban-col"><h3>Cancelled <span class="badge" id="countCancelled">0</span></h3><div id="colCancelled"></div></div>
+            </div>
+        </div>
+
+        <div id="viewMenuManager" style="display: none;">
+            <div class="main-grid" style="grid-template-columns: 400px 1fr;">
+                <div class="glass-panel">
+                    <div class="panel-header"><i class="fa-solid fa-plus-circle"></i> Add/Edit Item</div>
+                    <form id="menuForm">
+                        <input type="hidden" id="menuItemId">
+                        <div class="form-group">
+                            <label>Dish Name</label>
+                            <input type="text" id="menuItemName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="menuItemCat" class="form-input" required>
+                                <option value="Starters">Starters</option>
+                                <option value="Main Course">Main Course</option>
+                                <option value="Beverages">Beverages</option>
+                                <option value="Desserts">Desserts</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="number" id="menuItemPrice" class="form-input" required step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" id="menuItemDesc" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Dish Image</label>
+                            <input type="file" id="menuItemFile" class="form-input" accept="image/*">
+                            <input type="hidden" id="menuItemImg">
+                            <div id="imagePreview" style="margin-top:0.5rem; display:none;">
+                                <img src="" style="width:100%; height:150px; object-fit:cover; border-radius:8px; border: 1px solid var(--border-color);">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Menu Item</button>
+                        <button type="button" id="btnCancelEdit" class="btn btn-secondary" style="display:none;">Cancel Edit</button>
+                    </form>
+                </div>
+                <div class="glass-panel">
+                    <div class="panel-header"><i class="fa-solid fa-list"></i> Current Menu</div>
+                    <div id="adminMenuList" class="admin-menu-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
